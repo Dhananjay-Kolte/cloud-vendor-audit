@@ -1,0 +1,48 @@
+databaseChangeLog:
+  - changeSet:
+      failOnError: true
+      id: create-customer_detail-table
+      author: DJ
+      changes:
+        - createTable:
+            tableName: customer_detail
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: account_name
+                  type: varchar(32)
+              - column:
+                  name: role
+                  type: varchar2(512)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: external_id
+                  type: varchar(64)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: region
+                  type: varchar(16)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: varchar(64)
+              - column:
+                  name: date_created
+                  type: datetime
+              - column:
+                  name: date_modified
+                  type: datetime
+              - column:
+                  name: user_id
+                  type: bigint
+                  constraints:
+                    nullable: false 

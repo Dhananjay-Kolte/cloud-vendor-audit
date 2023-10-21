@@ -1,0 +1,50 @@
+server:
+  port: 8081
+
+spring:
+  profiles:
+    active:
+    - production
+  
+  sample:
+    datasource:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      jdbcUrl: jdbc:mysql://${DB_HOST}:3306/${DB_NAME}?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Europe/Berlin
+      username: ${DB_USERNAME}
+      password: ${DB_PASSWORD}
+      liquibase:
+        change-log: classpath:/db/changelog/db.changelog-master.yaml
+
+  datasource:
+    hikari:
+      connectionTimeout : 30000 
+      idleTimeout : 600000 
+      maxLifetime : 3000
+      maximumPoolSize : 100
+      minimumIdle : 5
+
+  main:
+    allow-bean-definition-overriding: true
+  jpa:
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: false
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+
+logging:
+  level:
+    org:
+      springframework:
+        web: DEBUG
+    root: DEBUG
+
+sample:
+  api-key: ${API_KEY}
+  aws:
+    access-key: ${AWS_ACCESS_KEY}
+    secret-key: ${AWS_SECRET_KEY}
+
+aws:
+  s3:
+    exclude-buckets: config-,aws-cloudtrail-logs-,athena
